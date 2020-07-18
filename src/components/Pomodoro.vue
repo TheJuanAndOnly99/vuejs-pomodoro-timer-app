@@ -1,14 +1,20 @@
 <template>
   <v-card class="mt-8">
-    <v-tabs v-model="timerType">
+    <v-tabs v-model="timerType" grow>
       <v-tab v-for="tab in tabTitles" :key="tab">{{ tab }}</v-tab>
       <v-tabs-items v-model="timerType">
         <v-tab-item>
           <v-card color="basil" class="pa-5" flat>
             <h1 class="time">00:00</h1>
-            <v-btn color="primary">Start</v-btn>
-            <v-btn>Stop</v-btn>
-            <v-btn>Reset</v-btn>
+            <v-btn color="success">
+              <v-icon left>mdi-play-circle-outline</v-icon>Start
+            </v-btn>
+            <v-btn color="error">
+              <v-icon left>mdi-stop-circle-outline</v-icon>Stop
+            </v-btn>
+            <v-btn color="primary">
+              <v-icon left>mdi-restart</v-icon>Reset
+            </v-btn>
           </v-card>
         </v-tab-item>
       </v-tabs-items>
@@ -30,4 +36,8 @@ export default {
 <style lang="sass" scoped>
 .v-card
   width: 600px
+.time
+  font-size: 80px
+  font-weight: 400
+  text-align: center
 </style>
