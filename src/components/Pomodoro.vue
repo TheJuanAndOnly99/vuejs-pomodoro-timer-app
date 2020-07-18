@@ -17,6 +17,8 @@
         </v-btn>
       </div>
     </v-card>
+
+    <SettingsDialog :dialog="dialog" />
   </v-card>
 </template>
 
@@ -26,6 +28,12 @@ import SettingsDialog from "./SettingsDialog.vue";
 export default {
   components: {
     SettingsDialog
+  },
+  props: {
+    dialog: {
+      type: Boolean,
+      reqired: true
+    }
   },
   data() {
     return {
