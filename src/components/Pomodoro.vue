@@ -28,10 +28,7 @@
 export default {
   data() {
     return {
-      display: {
-        minutes: "00",
-        seconds: "00"
-      },
+      timerInstance: null,
       totalSeconds: 25 * 60,
       timerType: 0,
       tabTitles: ["Pomodoro", "Short Break", "Long Break"]
@@ -50,12 +47,17 @@ export default {
   },
   methods: {
     start() {
-      setInterval(() => {
+      this.timerInstance = setInterval(() => {
         this.totalSeconds -= 1;
       }, 1000);
     },
-    stop() {},
-    reset() {},
+    stop() {
+      clearInterval(this.timerInstance);
+    },
+    reset() {
+      this.stop();
+      this.totalSeconds = 25 * 60;
+    },
     formatTime(time) {
       if (time < 10) {
         return "0" + time;
