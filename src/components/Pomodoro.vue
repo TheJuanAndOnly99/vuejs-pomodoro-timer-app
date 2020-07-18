@@ -5,15 +5,15 @@
       <v-tabs-items v-model="timerType">
         <v-tab-item>
           <v-card color="basil" class="pa-5 d-flex flex-column align-center" flat>
-            <h1 class="time">00:00</h1>
+            <h1 class="time">{{ displayMinutes }}:{{ displaySeconds }}</h1>
             <div class="button-group">
-              <v-btn color="success">
+              <v-btn @click="start" color="success">
                 <v-icon left>mdi-play-circle-outline</v-icon>Start
               </v-btn>
-              <v-btn color="error">
+              <v-btn @click="stop" color="error">
                 <v-icon left>mdi-stop-circle-outline</v-icon>Stop
               </v-btn>
-              <v-btn color="primary">
+              <v-btn @click="reset" color="primary">
                 <v-icon left>mdi-restart</v-icon>Reset
               </v-btn>
             </div>
@@ -37,12 +37,31 @@ export default {
       tabTitles: ["Pomodoro", "Short Break", "Long Break"]
     };
   },
+  computed: {
+    displayMinutes() {
+      const minutes = Math.floor(this.totalSeconds / 60);
+      return this.formatTime(minutes);
+    },
+    displaySeconds() {
+      const seconds = this.totalSeconds % 60;
+
+      return this.formatTime(seconds);
+    }
+  },
   methods: {
     start() {
-      setInterval(() => {}, 1000);
+      setInterval(() => {
+        this.totalSeconds -= 1;
+      }, 1000);
     },
     stop() {},
-    reset() {}
+    reset() {},
+    formatTime(time) {
+      if (time < 10) {
+        return "0" + time;
+      }
+      return time.toString();
+    }
   }
 };
 </script>
