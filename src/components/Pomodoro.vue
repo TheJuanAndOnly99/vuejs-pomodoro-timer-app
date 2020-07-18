@@ -18,7 +18,12 @@
       </div>
     </v-card>
 
-    <SettingsDialog :dialog="dialog" />
+    <SettingsDialog
+      :dialog="dialog"
+      :closeDialog="closeDialog"
+      :saveSettings="saveSettings"
+      :timers="timers"
+    />
   </v-card>
 </template>
 
@@ -33,6 +38,10 @@ export default {
     dialog: {
       type: Boolean,
       reqired: true
+    },
+    closeDialog: {
+      type: Function,
+      required: true
     }
   },
   data() {
@@ -97,6 +106,12 @@ export default {
     changeCurrentTimer(num) {
       this.currentTimer = num;
       this.reset(this.timers[num].minutes);
+    },
+    saveSettings(updatedTimers) {
+      this.timers = this.timers.map((timer, i) => {
+        return { ...timer, minutes: parseInt(updatedTimers[i]) };
+      });
+      this.closeDialog();
     }
   }
 };
