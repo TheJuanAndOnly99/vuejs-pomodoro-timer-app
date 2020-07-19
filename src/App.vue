@@ -9,6 +9,21 @@
           <v-btn @click="dialog = true" absolute top right dark small color="secondary">
             <v-icon left>mdi-cog-outline</v-icon>Settings
           </v-btn>
+          <v-switch
+            v-model="switch1"
+            @change="changeTheme"
+            inset
+            absolute
+            top
+            right
+            dark
+            small
+            color="black"
+          >
+            <template v-slot:label>
+              <v-icon right>mdi-brightness-6</v-icon>
+            </template>
+          </v-switch>
         </v-row>
       </v-container>
     </v-main>
@@ -24,7 +39,12 @@ export default {
   components: {
     Pomodoro
   },
-
+  props: {
+    switch1: {
+      type: Boolean,
+      required: true
+    }
+  },
   data() {
     return {
       dialog: false
@@ -33,6 +53,9 @@ export default {
   methods: {
     closeDialog() {
       this.dialog = false;
+    },
+    changeTheme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
     }
   }
 };
