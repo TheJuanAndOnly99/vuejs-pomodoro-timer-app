@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" persistent max-width="600px">
     <v-card>
       <v-card-title>
-        <span class="headline">Settings</span>
+        <span class="headline">TIMER SETTINGS</span>
       </v-card-title>
 
       <v-card-text>
